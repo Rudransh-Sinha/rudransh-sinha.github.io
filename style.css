@@ -15,7 +15,7 @@ body {
 /* === NAVBAR === */
 header {
   background: #007bff;
-  padding: 15px 30px;
+  padding: 1rem 1.5rem; /* Using 'rem' for better scaling */
   color: #fff;
   position: sticky;
   top: 0;
@@ -33,13 +33,11 @@ header {
   font-weight: bold;
 }
 
+/* Updated mobile-first approach for navigation */
 .nav-links {
   display: flex;
   list-style: none;
-}
-
-.nav-links li {
-  margin-left: 20px;
+  gap: 1.25rem; /* Replaces individual margins for a cleaner layout */
 }
 
 .nav-links a {
@@ -52,44 +50,68 @@ header {
   color: #ffd700;
 }
 
+/* --- Mobile Navigation Menu --- */
+/* We'll use JavaScript to toggle this */
+.nav-links.open {
+  transform: translateX(0);
+}
+
+.nav-toggle {
+  display: none; /* Hidden on desktop */
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
 /* === HERO === */
 .hero {
   text-align: center;
-  padding: 60px 20px;
+  padding: 4rem 1.25rem; /* Adjusted padding */
   background: linear-gradient(to right, #007bff, #00c6ff);
   color: #fff;
+}
+
+.hero h2 {
+  font-size: 2.5rem; /* Larger font size for prominence */
 }
 
 .hero h2 span {
   color: #ffd700;
 }
 
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
 /* === SECTIONS === */
 .section {
-  padding: 50px 20px;
+  padding: 3rem 1.25rem; /* Adjusted padding */
   max-width: 1000px;
   margin: auto;
 }
 
 .section h2 {
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
   color: #007bff;
 }
 
-/* === CARDS === */
+/* === CARDS (Project, Experience, etc.) === */
 .card {
   background: #fff;
-  padding: 20px;
-  margin: 15px 0;
+  padding: 1.25rem;
+  margin: 1rem 0;
   border-radius: 10px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Added subtle shadow for depth */
 }
 
-/* Hover Effect for All Cards */
 .card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px); /* Changed from scale for a smoother effect */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   background: #fdfdfd;
 }
@@ -97,8 +119,11 @@ header {
 /* === SKILLS GRID === */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(120px, 1fr)
+  ); /* Adjusted minmax for mobile */
+  gap: 1rem;
 }
 
 .skill {
@@ -110,21 +135,21 @@ header {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
   max-width: 500px;
   margin: auto;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 12px;
+  padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
 }
 
 .btn {
-  padding: 12px;
+  padding: 0.75rem 1.25rem;
   background: #007bff;
   color: #fff;
   border: none;
@@ -136,7 +161,7 @@ header {
 
 .btn:hover {
   background: #0056b3;
-  transform: scale(1.05);
+  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -147,19 +172,92 @@ header {
 /* === FOOTER === */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 1.5rem;
   background: #007bff;
   color: #fff;
-  margin-top: 30px;
+  margin-top: 2rem;
 }
 
-/* === RESPONSIVE NAVBAR (MOBILE) === */
+/* === RESPONSIVE DESIGN: Mobile-First and Desktop-First === */
+
+/* On screens smaller than 768px (Mobile) */
 @media (max-width: 768px) {
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
+  .logo {
+    font-size: 1.2rem; /* Smaller logo on mobile */
   }
+
+  /* Full-screen overlay for mobile navigation */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
   .nav-links li {
-    margin: 10px;
+    margin: 1.5rem 0; /* Increase spacing for touch targets */
+  }
+
+  .nav-links a {
+    font-size: 1.5rem;
+  }
+
+  .nav-toggle {
+    display: block; /* Show the hamburger icon */
+  }
+
+  /* Hide the desktop nav links on mobile */
+  .navbar .nav-links {
+    display: none;
+  }
+
+  .navbar .nav-links.open {
+    display: flex;
   }
 }
+
+/* === PROFILE IMAGE STYLING === */
+.profile-container {
+  text-align: center; /* Center the image on the page */
+  margin-bottom: 2rem; /* Add some space below the image */
+}
+
+.profile-pic {
+  width: 150px; /* Set a fixed size for the image on desktop */
+  height: 150px;
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensures the image fits without distortion */
+  border: 4px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Make the image responsive for smaller screens */
+@media (max-width: 768px) {
+  .profile-pic {
+    width: 120px; /* Slightly smaller size for mobile */
+    height: 120px;
+  }
+}
+
+/* On screens larger than 768px (Desktop) */
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none;
+  }
+  .nav-links {
+    transform: none !important;
+  }
+}
+
