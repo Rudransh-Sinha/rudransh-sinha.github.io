@@ -16,12 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// === Simple Mobile Nav Toggle (optional) ===
-// If you want a hamburger menu for small screens later
-// just add a button with id="menu-toggle" and class "nav-links"
+// === Side-Sliding Nav Toggle ===
 const toggle = document.getElementById("menu-toggle");
-if (toggle) {
+const navLinks = document.querySelector(".nav-links");
+const body = document.body;
+
+if (toggle && navLinks) {
   toggle.addEventListener("click", () => {
-    document.querySelector(".nav-links").classList.toggle("open");
+    navLinks.classList.toggle("open");
+    body.classList.toggle("menu-open");
   });
 }
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (navLinks.classList.contains("open")) {
+      navLinks.classList.remove("open");
+      body.classList.remove("menu-open");
+    }
+  });
+});
